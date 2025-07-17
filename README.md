@@ -7,23 +7,11 @@
 
 ## 🧪 Aktueller Stand: Phase 1 – Simulation
 
-In Python mit `pygame` wurde eine 2D-Simulation erstellt:
-V1.
-- Ein rechteckiger Roboter fährt automatisch über eine frei mit der Maus gezeichnete blaue Linie.
-- Drei Sensoren vorne am Roboter erkennen, ob sie sich über einer Linie befinden (links, mitte, rechts).
-- Die Fahrtrichtung (Winkel) wird durch einfache Entscheidungslogik korrigiert, um mittig auf der Linie zu bleiben.
-- Linien können live per Maus gezeichnet und mit der Taste `C` gelöscht werden.
-
-changelog:
-    - zufälliger Start- und Endpunkt mit diskreter Kurve verbunden
-    - kleinere Änderungen
-        - Ausrichtung des Roboters auf Startpunkt
-        - Bedingung für Sieg: Roboter erreicht Ziel
-        - Mindestabstand zum Rand (120px)
-    - Logging
-        - Rückgabe von
-            - Ergebnis (1=Ziel erreicht, -1=60 Sekunden vergangen)
-            - Sensorzeit - Zeit in Sekunden auf dem Sensor von 60
+- Start- und Endpunkt werden zufallsbasiert erstellt und diskret verbunden
+- Roboter folgt mit einfacher Logik Linie zum Ziel
+- Logging System
+      - Datenerfassung (Ziel erreicht, Dauer, Sensoreneffizienz)
+      - Möglichkeit mehrere Durchläufe auf einmal zu starten
 
 ## 🧠 Steuerungslogik
 
