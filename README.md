@@ -1,6 +1,6 @@
-# 🤖 RaspberryPi Roboter mit Linienverfolgung
+# Roboter mit Linienverfolgung
 
-## 🚧 Projektphasen
+## Projektphasen
 
 - **Phase 1** – Simulation mit einfacher Logik *(aktueller Stand)*
 - **Phase 2** – KI verwenden, um durch Lernen Fehlerbewältigung zu ermöglichen
@@ -24,7 +24,6 @@ changelog:
         - Rückgabe von
             - Ergebnis (1=Ziel erreicht, -1=60 Sekunden vergangen)
             - Sensorzeit - Zeit in Sekunden auf dem Sensor von 60
-            - 
 
 ## 🧠 Steuerungslogik
 
@@ -41,7 +40,7 @@ python -m venv venv
 pip install pygame
 
 Windows (CMD/Powershell):
-```cmd
+cmd
 venv\Scripts\activate
 
 macOS / Linux:
