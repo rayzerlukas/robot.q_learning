@@ -3,18 +3,28 @@
 ## 🚧 Projektphasen
 
 - **Phase 1** – Simulation mit einfacher Logik *(aktueller Stand)*
-- **Phase 2** – Einfache Logik auf Roboter mit Raspberry Pi anwenden
-- **Phase 3** – KI verwenden, um durch Lernen Fehlerbewältigung zu ermöglichen
-- **Phase 4** – KI auf Roboter anwenden
+- **Phase 2** – KI verwenden, um durch Lernen Fehlerbewältigung zu ermöglichen
 
 ## 🧪 Aktueller Stand: Phase 1 – Simulation
 
 In Python mit `pygame` wurde eine 2D-Simulation erstellt:
-
+V1.
 - Ein rechteckiger Roboter fährt automatisch über eine frei mit der Maus gezeichnete blaue Linie.
 - Drei Sensoren vorne am Roboter erkennen, ob sie sich über einer Linie befinden (links, mitte, rechts).
 - Die Fahrtrichtung (Winkel) wird durch einfache Entscheidungslogik korrigiert, um mittig auf der Linie zu bleiben.
 - Linien können live per Maus gezeichnet und mit der Taste `C` gelöscht werden.
+
+changelog:
+    - zufälliger Start- und Endpunkt mit diskreter Kurve verbunden
+    - kleinere Änderungen
+        - Ausrichtung des Roboters auf Startpunkt
+        - Bedingung für Sieg: Roboter erreicht Ziel
+        - Mindestabstand zum Rand (120px)
+    - Logging
+        - Rückgabe von
+            - Ergebnis (1=Ziel erreicht, -1=60 Sekunden vergangen)
+            - Sensorzeit - Zeit in Sekunden auf dem Sensor von 60
+            - 
 
 ## 🧠 Steuerungslogik
 

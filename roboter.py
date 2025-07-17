@@ -1,9 +1,9 @@
 import pygame as pg
 class Roboter:
-    def __init__(self, x, y):
+    def __init__(self, x, y, w):
         self.x = x
         self.y = y
-        self.winkel = 0
+        self.winkel = w
         self.geschwindigkeit = .5
         self.drehrate = 2
 
