@@ -5,7 +5,7 @@ class Roboter:
         self.y = y
         self.winkel = w
         self.geschwindigkeit = .5
-        self.drehrate = 2
+        self.drehrate = 3
 
         self.image = pg.Surface((50, 30), pg.SRCALPHA)
         pg.draw.rect(self.image, (0, 0, 255), (0, 0, 50, 30))
@@ -28,7 +28,7 @@ class Roboter:
 
         # Sensoren relativ zu rect.center berechnen
         offset = 15
-        abstand = 8
+        abstand = 18
         cx, cy = self.rect.center
         rad = math.radians(self.winkel)
 
@@ -58,7 +58,7 @@ class Roboter:
         import math
         rad = math.radians(self.winkel)
         offset = 15
-        abstand = 8  # Abstand links/rechts vom Zentrum
+        abstand = 18  # Abstand links/rechts vom Zentrum
         cx, cy = self.rect.center
         
         # Mittlere Sensor
@@ -81,3 +81,13 @@ class Roboter:
             farbe_links = farbe_rechts = farbe_mitte = (255, 255, 255, 255)
 
         return farbe_links, farbe_rechts, farbe_mitte   
+    
+    # für q_learning.py
+    def bewege(self, aktion):
+        if aktion == "links":
+            self.winkel += self.drehrate
+        elif aktion == "rechts":
+            self.winkel -= self.drehrate
+        elif aktion == "geradeaus":
+            pass
+        self.update()

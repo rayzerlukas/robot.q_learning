@@ -24,7 +24,7 @@ changelog:
         - Rückgabe von
             - Ergebnis (1=Ziel erreicht, -1=60 Sekunden vergangen)
             - Sensorzeit - Zeit in Sekunden auf dem Sensor von 60
-            - 
+            - Zeit in Sekunden bis Ziel erreicht
 
 ## 🧠 Steuerungslogik
 
