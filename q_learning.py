@@ -7,9 +7,11 @@ import json
 from multiprocessing import Manager
 
 # Hyperparameter für Q-Learning
-learning_rate = 0.1
-discount_factor = 0.9
-exploration_rate = 0.2
+learning_rate = 0.2
+discount_factor = 0.8
+exploration_rate = 0.6
+min_exploration_rate = 0.1
+exploration_decay = 0.995
 actions = ["links", "geradeaus", "rechts"]
 
 # Q-Tabelle initialisieren
@@ -87,15 +89,24 @@ def run_episode(id, Q_table):
 
     start_time = time.time()
 
-    while time.time() - start_time < 60:
+    running = True
 
-        
+    episode_explorade_rate = exploration_rate
+
+    while time.time() - start_time < 60 and running == True:
         # Sensoren lesen
         fl, fm, fr = roboter.sensor_lese(hintergrund)
         state = get_state(fl, fr, fm)
 
-        # Aktion wählen
-        action = choose_action(state, Q_local)
+        if state not in Q_local:
+                Q_local[state] = {a: 0.0 for a in actions}
+
+        # Aktion wählen mit aktueller exploration_rate 
+        if random.random() < episode_explorade_rate:
+            action = random.choice(actions)
+        else:
+            action = max(Q_local[state].items(), key=lambda x: x[1])[0]
+
         roboter.bewege(action)
 
         next_state = get_state(*roboter.sensor_lese(hintergrund))
@@ -106,8 +117,12 @@ def run_episode(id, Q_table):
 
         # Ziel erreicht
         dist = math.hypot(roboter.x - end[0], roboter.y - end[1])
-        if dist < 10:
+        if dist < 20:
+            reward += 100
             running = False
+
+    # Exploration Rate anpassen
+    episode_explorade_rate = max(min_exploration_rate, episode_explorade_rate * exploration_decay)
 
     for state in Q_local:
         if state not in Q_table:
@@ -154,7 +169,7 @@ def run_play_episode():
             x = 0.5 * ((2 * p1[0]) + (-p0[0] + p2[0]) * t + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t**2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t**3)
             y = 0.5 * ((2 * p1[1]) + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t**2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t**3)
             punkte2.append((x, y))
-    punkte2 = punkte2[:len(punkte2) - 70] + [end]
+    punkte2 = punkte2[:len(punkte2) - 55] + [end]
 
     # Linie auf Hintergrund zeichnen
     for i in range(len(punkte2) - 1):
@@ -170,7 +185,9 @@ def run_play_episode():
     start_time = time.time()
     clock = pg.time.Clock()
 
-    while time.time() - start_time < 60:
+    running = True
+
+    while time.time() - start_time < 60 and running == True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -198,8 +215,7 @@ def run_play_episode():
             running = False
 
         dist = math.hypot(roboter.x - end[0], roboter.y - end[1])
-        if dist < 10:
-            reward = 100000
+        if dist < 20:
             running = False
-        
-pg.quit()
+    pg.quit()     
+

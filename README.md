@@ -1,40 +1,20 @@
-# 🤖 RaspberryPi Roboter mit Linienverfolgung
+# Roboter mit Linienverfolgung
+## Simulation
 
-## 🚧 Projektphasen
+- Mithilfe von Pygame werden ein zufälliger Start- und Endpunkt generiert, welche mit einer zufälligen Linie (Catmull-Rom Kurve) verbunden werden.
 
-- **Phase 1** – Simulation mit einfacher Logik *(aktueller Stand)*
-- **Phase 2** – KI verwenden, um durch Lernen Fehlerbewältigung zu ermöglichen
+- Ein Roboter wird mit Ausrichtung auf den Endpunkt am Startpunkt initilisiert
 
-## 🧪 Aktueller Stand: Phase 1 – Simulation
+## Steuerungslogik
 
-In Python mit `pygame` wurde eine 2D-Simulation erstellt:
-V1.
-- Ein rechteckiger Roboter fährt automatisch über eine frei mit der Maus gezeichnete blaue Linie.
-- Drei Sensoren vorne am Roboter erkennen, ob sie sich über einer Linie befinden (links, mitte, rechts).
-- Die Fahrtrichtung (Winkel) wird durch einfache Entscheidungslogik korrigiert, um mittig auf der Linie zu bleiben.
-- Linien können live per Maus gezeichnet und mit der Taste `C` gelöscht werden.
-
-changelog:
-    - zufälliger Start- und Endpunkt mit diskreter Kurve verbunden
-    - kleinere Änderungen
-        - Ausrichtung des Roboters auf Startpunkt
-        - Bedingung für Sieg: Roboter erreicht Ziel
-        - Mindestabstand zum Rand (120px)
-    - Logging
-        - Rückgabe von
-            - Ergebnis (1=Ziel erreicht, -1=60 Sekunden vergangen)
-            - Sensorzeit - Zeit in Sekunden auf dem Sensor von 60
-            - Zeit in Sekunden bis Ziel erreicht
-
-## 🧠 Steuerungslogik
-
-- Wenn der mittlere Sensor blau sieht: nur feine Korrekturen mit äußeren Sensoren.
-- Wenn der mittlere Sensor leer ist, aber äußere aktiv sind: stärkere Korrektur in Richtung der Linie.
-- Wenn kein Sensor blau sieht: leichte Drehung zur rechten Seite (kann später durch "Suchmodus" verbessert werden).
-
+- Die Steuerung basiert auf drei Sensoren, welche die Linie erkennen
+- Mitihlfe eines Reward-Systems und Q-Learning ist der Roboter in der Lage autonom Entscheidungen zu treffen und der Linie zu folgen.
+    - Dabei wird der Roboter belohnt, wenn die Sensoren die Linie berühren und wenn er das Ziel erreicht
+    - Durch Q-Learning exploriert der Roboter außerdem: d.h. er wählt nicht immer die beste Option, sondern manchmal zufallsbasiert links, geradeaus oder rechts
+- Der Roboter funktioniert also mittels Reinforcement Learning 
 ## 🧰 Vorbereitung: Virtuelle Umgebung aktivieren
 
-Bevor du das Projekt startest, aktiviere deine virtuelle Umgebung:
+Bevor das Projekt gestartet werden kann, muss ein virtuelles Environment erstellt werden:
 
 Einrichten des venv:
 python -m venv venv
@@ -47,6 +27,8 @@ venv\Scripts\activate
 macOS / Linux:
 source venv/bin/activate
 
-dann "python main.py"
+Dann kann der Trainingsprozess ausgeführt werden, dabei reichen 1-2 Durchläufe für eine recht hohe Erfolgschance
 
-und mit gedrückter linker Maustaste eine Linie zeichnen - Roboter folgt.
+Visualisiert wird ein einzelner Durchlauf mittels play.py
+
+

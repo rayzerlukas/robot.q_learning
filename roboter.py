@@ -28,7 +28,7 @@ class Roboter:
 
         # Sensoren relativ zu rect.center berechnen
         offset = 15
-        abstand = 18
+        abstand = 12
         cx, cy = self.rect.center
         rad = math.radians(self.winkel)
 
@@ -58,7 +58,7 @@ class Roboter:
         import math
         rad = math.radians(self.winkel)
         offset = 15
-        abstand = 18  # Abstand links/rechts vom Zentrum
+        abstand = 12  # Abstand links/rechts vom Zentrum
         cx, cy = self.rect.center
         
         # Mittlere Sensor
