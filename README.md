@@ -12,7 +12,7 @@
     - Dabei wird der Roboter belohnt, wenn die Sensoren die Linie berühren und wenn er das Ziel erreicht
     - Durch Q-Learning exploriert der Roboter außerdem: d.h. er wählt nicht immer die beste Option, sondern manchmal zufallsbasiert links, geradeaus oder rechts
 - Der Roboter funktioniert also mittels Reinforcement Learning 
-## 🧰 Vorbereitung: Virtuelle Umgebung aktivieren
+## Vorbereitung
 
 Bevor das Projekt gestartet werden kann, muss ein virtuelles Environment erstellt werden:
 
@@ -21,7 +21,7 @@ python -m venv venv
 pip install pygame
 
 Windows (CMD/Powershell):
-```cmd
+cmd
 venv\Scripts\activate
 
 macOS / Linux:
